@@ -15,8 +15,9 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->timestamps();
-            $table->json('skills'); // resource https://stackoverflow.com/questions/32954424/laravel-migration-array-type-store-array-in-database-column
+            $table->json('skills')->nullable(); // resource https://stackoverflow.com/questions/32954424/laravel-migration-array-type-store-array-in-database-column
             $table->string('content');
 
         });

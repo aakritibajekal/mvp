@@ -20,10 +20,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('hourlyRate');
+            $table->string('hourlyRate')->nullable();
             $table->string('city');
             $table->json('skills')->nullable();
-            $table->set('role', ['jobFinder', 'jobPoster']);
+            $table->set('role', ['jobFinder', 'jobPoster'])->nullable();
             $table->string('companyName');
             $table->timestamps();
         });

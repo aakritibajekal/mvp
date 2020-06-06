@@ -21,7 +21,6 @@ class PostSeeder extends Seeder
             DB::table( 'posts' )->insert( array(
                 'content' => $faker->paragraph,
                 'user_id' => $faker->randomElement(User::pluck( 'id' )->toArray()), 
-                'posted_at' => $faker->timestamp(),   
             ));
         }
     }
