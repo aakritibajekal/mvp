@@ -19,7 +19,7 @@ class PostSeeder extends Seeder
         foreach( range(1, 40) as $index )
          {
             DB::table( 'posts' )->insert( array(
-                'content' => $faker->paragraph,
+                'content' => $faker->text(250),
                 'user_id' => $faker->randomElement(User::pluck( 'id' )->toArray()), 
             ));
         }

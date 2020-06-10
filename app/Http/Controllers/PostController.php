@@ -21,33 +21,30 @@ class PostController extends Controller
         //
         if ( $user = Auth::user() )
         {
-            $posts = Post::query( )
+            $posts = Posts::query( )
             ->join( 'users', 'posts.user_id', '=', 'users.id' )
             ->select( 
                 'posts.id',
                 'users.id as user_id',
                 'users.name',
-                'posts.posted_at',
-                'posts.posted_at',
                 'posts.content',
-                'users.companyName', )
-                ->orderBy('posts.posted_at');
+                'users.companyName' )
+                ->orderBy('users.name')
+                ->get();
 
-                $post = Post::where("user_id", "=", $user->id)->first();
-
-                return view();
+                $post = Posts::where("user_id", "=", $user->id)->first();
+                dd($posts);
+                return view( 'posts.index', compact('posts') );
         } else
-        $posts = Post::query()
+        $posts = Posts::query()
                 ->join( 'users', 'posts.user_id', '=', 'users.id' )
                 ->select( 'posts.id',
                 'users.id as user_id',
                 'users.name',
                 'users.companyName',
-                'posts.posted_at',
-                'posts.posted_at',
                 'posts.content',
                  )
-                ->orderBy('posts.posted_at',)
+                ->orderBy('users.name',)
                 ->get();
 
                 return view( 'posts.index', compact('posts'));
@@ -64,6 +61,14 @@ class PostController extends Controller
     public function create()
     {
         //
+        $user = Auth::user();
+        if ( $user ) // we are logged in and can create posts
+
+        
+
+            return view('posts.create');
+        else // not logged in, can not make posts. redirect to index
+            return redirect('/posts');
     }
 
     /**
@@ -75,6 +80,21 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        if ( $user = Auth::user() ) //only store data if user is logged in. 
+        {
+
+        $validatedData = $request->validate(array( 
+            'content' => 'required|max:255',
+           
+        ));
+        $post = new Posts();
+        $post->user_id = $user->id;
+        $post->save();
+        
+    
+         return redirect('/posts')->with('success', 'Job saved.');
+        }// redirect by default
+         return redirect('/posts');
     }
 
     /**
@@ -86,6 +106,13 @@ class PostController extends Controller
     public function show($id)
     {
         //
+        $post = Posts::findOrFail($id);
+
+        $user = User::findOrFail($post->user_id);
+
+        $user = User::where("user_id", "=", $user->id)->firstOrFail(); 
+
+        return view( 'posts.show', compact('post', 'user') );
     }
 
     /**
@@ -97,6 +124,13 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        if ( $user = Auth::user() ) {
+            
+            $post = Posts::findOrFail($id);
+
+            return view( 'posts.edit', compact('post') );
+        }
+        return redirect('/posts');
     }
 
     /**
@@ -109,6 +143,16 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if ( $user = Auth::user() ) {
+            $validatedData = $request->validate(array( 
+                'content' => 'required|max:255',
+             ));
+    
+             Posts::whereId($id)->update($validatedData);
+
+             return redirect('/posts')->with('success', 'Job updated.');
+            }
+            return redirect('/posts');
     }
 
     /**
@@ -120,5 +164,13 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        if ( $user = Auth::user() ) {
+            $post = Posts::findOrFail($id);
+    
+            $post->delete();
+    
+            return redirect('/posts')->with('success', 'Job post deleted.');
+        }
+        return redirect('/posts');
     }
 }

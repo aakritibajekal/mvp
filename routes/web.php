@@ -20,3 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource( 'users', 'UserController' );
+
+Route::resource( 'posts', 'PostController' );
+
+Route::get('post/{id}', 'PostController@showUser');
+
+Route::post('formSubmit','PostController@formSubmit');

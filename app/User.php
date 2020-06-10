@@ -37,4 +37,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'skills' => 'array'
     ];
+
+    public function user()
+    {
+        return $this->hasOne( 'App\User' );
+    }
+    public function posts()
+    {
+        return $this->hasMany( 'App\Post' );
+    }
 }

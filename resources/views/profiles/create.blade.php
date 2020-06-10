@@ -39,6 +39,22 @@ Create User Profile
                         <input id="jobFinder" type="radio"class="form-control" name="role" value="jobFinder">
                         <input id="jobPoster" type="radio"class="form-control" name="role" value="jobPoster">
                 </label>
+                <label for="futureSkills"> 
+                {{-- Resources --}}
+                {{-- https://harvesthq.github.io/chosen/ --}}
+                {{-- https://select2.org/getting-started/basic-usage --}}
+                {{-- http://jsfiddle.net/iiic/t66boyea/1 (good if options are preset) --}}
+                {{-- https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_datalist (good if I am proving all the options)--}}
+                </label>
+                <label for="skills">Choose your browser from the list:</label>
+                    <input list="skills" name="skill" id="skill">
+                    <datalist id="skill">
+                        <option value="Coding">
+                        <option value="Designing">
+                        <option value="Web UX">
+                        <option value="SEO">
+                        <option value="SEM">
+                    </datalist>
                 <div class="form-group">
                     <input class="btn btn-primary btn-customized align-bottom" type="submit" value="Create Profile!">
                 </div>

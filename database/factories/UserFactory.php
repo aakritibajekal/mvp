@@ -18,6 +18,8 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    $role = "jobFinder"; 
+    if( rand(0, 1) == 1) $role = "jobPoster";
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
@@ -26,5 +28,6 @@ $factory->define(User::class, function (Faker $faker) {
         'city' => $faker->city,
         'companyName' => $faker->company,
         'remember_token' => Str::random(50),
+        'role' => $role
     ];
 });

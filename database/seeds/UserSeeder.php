@@ -17,6 +17,9 @@ class UserSeeder extends Seeder
 
         foreach( range(1, 50) as $index ) 
         {
+            $role = "jobFinder"; 
+            if( rand(0, 1) == 1) $role = "jobPoster";
+
             DB::table( 'users' )->insert( array(
                 'name' => $faker->name,
                 'email' => $faker->email,
@@ -24,6 +27,7 @@ class UserSeeder extends Seeder
                 'city' => $faker->city,
                 'companyName' => $faker->company,
                 'created_at' => date( "Y-m-d H:i:s" ),
+                'role' => $role,
             ));
         }
     }

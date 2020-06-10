@@ -24,7 +24,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
@@ -52,15 +51,45 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                            <label for="hourlyRate" class="col-md-4 col-form-label text-md-right">
+                                <strong> Hourly Rate: </strong>
+                                <input type="text" name="hourlyRate" id="hourlyRate" class="col-md-6">
+                            </label>
                         </div>
-
+                        <div class="form-group row">
+                            <label for="city" class="col-md-4 col-form-label text-md-right">
+                                <strong> City: </strong>
+                                <input type="text" id="city" name="city" class="col-md-6">
+                            </label>
+                        <div>
+                        <div class="form-group row">
+                            <label for="companyName" class="col-md-4 col-form-label text-md-right">
+                                <strong> Company Name: </strong>
+                                <input type="text" id="companyName" name="companyName" class="col-md-6">
+                            </label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">
+                                <strong> Role: </strong>
+                                <input id="jobFinder" type="radio"class="col-md-6" name="role" value="jobFinder"> Job Finder
+                                <input id="jobPoster" type="radio"class="col-md-6" name="role" value="jobPoster"> Job Poster
+                            </label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="skills" class="col-md-4 col-form-label text-md-right">Choose your Skills from the list:
+                                <input list="skills" name="skill[]"  class="col-md-6">
+                                    <datalist id="skills">
+                                    <option value="Coding">Coding</option>
+                                    <option value="Designing">Designing</option>
+                                    <option value="Web UX">Web UX</option>
+                                    <option value="SEO">SEO</option>
+                                    <option value="SEM">SEM</option>
+                                </datalist>
+                                <input list="skills" name="skill[]"  class="col-md-6">
+                                <input list="skills" name="skill[]"  class="col-md-6">
+                                </label>
+                            </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
